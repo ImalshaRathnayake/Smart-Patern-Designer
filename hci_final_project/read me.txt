@@ -1,0 +1,3 @@
+192.168.8.169
+const char* ssid = "Dialog 4G 640";
+const char* password = "a59Bb9d1";
