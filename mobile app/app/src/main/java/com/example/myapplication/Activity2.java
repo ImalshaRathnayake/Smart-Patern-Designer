@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.text.PrecomputedText;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
@@ -16,7 +17,20 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.xml.transform.Result;
+
 public class Activity2 extends AppCompatActivity {
+
+    /*
+    08 07 06 05 04 03 02 01
+    9 10 11 12 13 14 15 16
+    24 23 22 21 20 19 18 17
+    25 26 27 28 29 30 31 32
+    40 39 38 37 36 35 34 33
+    41 42 43 44 45 46 47 48
+    56 55 54 53 52 51 50 49
+    57 58 59 60 61 62 63 64
+    */
 
 
     GridLayout gridLayout;
@@ -47,9 +61,12 @@ public class Activity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity2);
 
+
+
         Intent intent = getIntent();
         if (intent != null) {
             ipAddress = getIntent().getStringExtra("ipAddress");
+            System.out.println("the ip address is :"+ipAddress);
         }
 
         gridLayout = findViewById(R.id.gridLayout);
@@ -204,6 +221,7 @@ public class Activity2 extends AppCompatActivity {
                         for (int i = 0; i < gridLayout.getChildCount(); i++) {
                             Button button = (Button) gridLayout.getChildAt(i);
                             button.setBackgroundColor(mDefaultColor);
+                            changeLEDColor(i, mDefaultColor);
                         }
                     }
                 });
@@ -217,8 +235,9 @@ public class Activity2 extends AppCompatActivity {
 
                         for (int i = 0; i < gridLayout.getChildCount(); i++) {
                             Button button = (Button) gridLayout.getChildAt(i);
-                            button.setBackgroundColor(Color.parseColor("#FF6200EE"));
-                            mColorPreview.setBackgroundColor(Color.parseColor("#FF6200EE"));
+                            button.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            mColorPreview.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                            changeLEDColor(i, Color.parseColor("#FFFFFF"));
                         }
                     }
                 });
@@ -232,7 +251,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(0);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(0, mDefaultColor);
+                        changeLEDColor(7, mDefaultColor);
                     }
                 });
         m02.setOnClickListener(
@@ -244,7 +263,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(1);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(1, mDefaultColor);
+                        changeLEDColor(6, mDefaultColor);
                     }
                 });
         m03.setOnClickListener(
@@ -256,7 +275,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(2);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(2, mDefaultColor);
+                        changeLEDColor(5, mDefaultColor);
                     }
                 });
         m04.setOnClickListener(
@@ -268,7 +287,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(3);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(3, mDefaultColor);
+                        changeLEDColor(4, mDefaultColor);
                     }
                 });
         m05.setOnClickListener(
@@ -280,7 +299,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(4);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(4, mDefaultColor);
+                        changeLEDColor(3, mDefaultColor);
                     }
                 });
         m06.setOnClickListener(
@@ -292,7 +311,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(5);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(5, mDefaultColor);
+                        changeLEDColor(2, mDefaultColor);
                     }
                 });
         m07.setOnClickListener(
@@ -304,7 +323,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(6);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(6, mDefaultColor);
+                        changeLEDColor(1, mDefaultColor);
                     }
                 });
         m08.setOnClickListener(
@@ -316,7 +335,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(7);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(7, mDefaultColor);
+                        changeLEDColor(0, mDefaultColor);
                     }
                 });
         m09.setOnClickListener(
@@ -424,7 +443,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(16);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(16, mDefaultColor);
+                        changeLEDColor(23, mDefaultColor);
                     }
                 });
         m18.setOnClickListener(
@@ -436,7 +455,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(17);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(17, mDefaultColor);
+                        changeLEDColor(22, mDefaultColor);
                     }
                 });
         m19.setOnClickListener(
@@ -448,7 +467,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(18);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(18, mDefaultColor);
+                        changeLEDColor(21, mDefaultColor);
                     }
                 });
         m20.setOnClickListener(
@@ -460,7 +479,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(19);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(19, mDefaultColor);
+                        changeLEDColor(20, mDefaultColor);
                     }
                 });
         m21.setOnClickListener(
@@ -472,7 +491,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(20);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(20, mDefaultColor);
+                        changeLEDColor(19, mDefaultColor);
                     }
                 });
         m22.setOnClickListener(
@@ -484,7 +503,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(21);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(21, mDefaultColor);
+                        changeLEDColor(18, mDefaultColor);
                     }
                 });
         m23.setOnClickListener(
@@ -496,7 +515,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(22);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(22, mDefaultColor);
+                        changeLEDColor(17, mDefaultColor);
                     }
                 });
         m24.setOnClickListener(
@@ -508,7 +527,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(23);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(23, mDefaultColor);
+                        changeLEDColor(16, mDefaultColor);
                     }
                 });
         m25.setOnClickListener(
@@ -616,7 +635,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(32);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(32, mDefaultColor);
+                        changeLEDColor(39, mDefaultColor);
                     }
                 });
         m34.setOnClickListener(
@@ -628,7 +647,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(33);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(33, mDefaultColor);
+                        changeLEDColor(38, mDefaultColor);
                     }
                 });
         m35.setOnClickListener(
@@ -640,7 +659,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(34);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(34, mDefaultColor);
+                        changeLEDColor(37, mDefaultColor);
                     }
                 });
         m36.setOnClickListener(
@@ -652,7 +671,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(35);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(35, mDefaultColor);
+                        changeLEDColor(36, mDefaultColor);
                     }
                 });
         m37.setOnClickListener(
@@ -664,7 +683,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(36);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(36, mDefaultColor);
+                        changeLEDColor(35, mDefaultColor);
                     }
                 });
         m38.setOnClickListener(
@@ -676,7 +695,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(37);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(37, mDefaultColor);
+                        changeLEDColor(34, mDefaultColor);
                     }
                 });
         m39.setOnClickListener(
@@ -688,7 +707,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(38);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(38, mDefaultColor);
+                        changeLEDColor(33, mDefaultColor);
                     }
                 });
         m40.setOnClickListener(
@@ -700,7 +719,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(39);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(39, mDefaultColor);
+                        changeLEDColor(32, mDefaultColor);
                     }
                 });
         m41.setOnClickListener(
@@ -808,7 +827,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(48);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(48, mDefaultColor);
+                        changeLEDColor(55, mDefaultColor);
                     }
                 });
         m50.setOnClickListener(
@@ -820,7 +839,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(49);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(49, mDefaultColor);
+                        changeLEDColor(54, mDefaultColor);
                     }
                 });
         m51.setOnClickListener(
@@ -832,7 +851,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(50);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(50, mDefaultColor);
+                        changeLEDColor(53, mDefaultColor);
                     }
                 });
         m52.setOnClickListener(
@@ -844,7 +863,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(51);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(51, mDefaultColor);
+                        changeLEDColor(52, mDefaultColor);
                     }
                 });
         m53.setOnClickListener(
@@ -856,7 +875,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(52);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(52, mDefaultColor);
+                        changeLEDColor(51, mDefaultColor);
                     }
                 });
         m54.setOnClickListener(
@@ -868,7 +887,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(53);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(53, mDefaultColor);
+                        changeLEDColor(50, mDefaultColor);
                     }
                 });
         m55.setOnClickListener(
@@ -880,7 +899,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(54);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(54, mDefaultColor);
+                        changeLEDColor(49, mDefaultColor);
                     }
                 });
         m56.setOnClickListener(
@@ -892,7 +911,7 @@ public class Activity2 extends AppCompatActivity {
 
                         Button button = (Button) gridLayout.getChildAt(55);
                         button .setBackgroundColor(mDefaultColor);
-                        changeLEDColor(55, mDefaultColor);
+                        changeLEDColor(48, mDefaultColor);
                     }
                 });
         m57.setOnClickListener(
@@ -996,39 +1015,54 @@ public class Activity2 extends AppCompatActivity {
     }
 
     public void changeLEDColor(int button, int color) {
-        String url = "http://192.168.8.169/color-and-button"; // Replace <ESP32-IP-ADDRESS> with the IP address of your ESP32
+        ChangeLEDColorTask task = new ChangeLEDColorTask();
+        task.execute(button, color);
 
-        try {
-            URL obj = new URL(url);
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+    }
 
-            // Set request method
-            con.setRequestMethod("POST");
 
-            // Set request headers
-            con.setRequestProperty("Content-Type", "application/json");
+    private class ChangeLEDColorTask extends AsyncTask<Integer, Void, Void> {
 
-            // Set request body
-            JSONObject requestBody = new JSONObject();
-            requestBody.put("button", button);
-            requestBody.put("color", color);
-            String requestBodyString = requestBody.toString();
+        @Override
+        protected Void doInBackground(Integer... params) {
+            int button = params[0];
+            int color = params[1];
+            String url = "http://"+ipAddress+"/color-and-button"; // Replace <ESP32-IP-ADDRESS> with the IP address of your ESP32
 
-            // Send request
-            con.setDoOutput(true);
-            OutputStream os = con.getOutputStream();
-            os.write(requestBodyString.getBytes());
-            os.flush();
-            os.close();
+            try {
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
-            // Get response
-            int responseCode = con.getResponseCode();
-            String responseMessage = con.getResponseMessage();
-            System.out.println("Response code: " + responseCode);
-            System.out.println("Response message: " + responseMessage);
+                // Set request method
+                con.setRequestMethod("POST");
 
-        } catch (Exception e) {
-            e.printStackTrace();
+                // Set request headers
+                con.setRequestProperty("Content-Type", "application/json");
+
+                // Set request body
+                JSONObject requestBody = new JSONObject();
+                requestBody.put("button", button);
+                requestBody.put("color", color);
+                String requestBodyString = requestBody.toString();
+
+                // Send request
+                con.setDoOutput(true);
+                OutputStream os = con.getOutputStream();
+                os.write(requestBodyString.getBytes());
+                os.flush();
+                os.close();
+
+                // Get response
+                int responseCode = con.getResponseCode();
+                String responseMessage = con.getResponseMessage();
+                System.out.println("Response code: " + responseCode);
+                System.out.println("Response message: " + responseMessage);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return null;
         }
     }
 
