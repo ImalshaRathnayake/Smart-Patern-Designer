@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,14 +29,15 @@ public class Activity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity1);
 
-        ipAddressEditText=(EditText) findViewById(R.id.ip_address_value);
-        btn_enter=(Button) findViewById(R.id.btnConnection);
-        ipAddress=btn_enter.getText().toString();
+        ipAddressEditText=findViewById(R.id.ip_address_value);
+        btn_enter=findViewById(R.id.btnConnection);
+        ipAddress=ipAddressEditText.getText().toString();
 
         btn_enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Activity1.this, Activity2.class);
+                intent.putExtra("ipAddress", ipAddress);
                 startActivity(intent);
             }
 
