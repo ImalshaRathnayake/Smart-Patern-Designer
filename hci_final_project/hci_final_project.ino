@@ -8,12 +8,15 @@
 
 #define NUM_LEDS 64  //define number of bulbs
 #define LED_PIN 5    //define the data pin connect with ws2812
+#define potentiometer 34//define the data pin for potentiometer
+
+int brightness;
 
 CRGB leds[NUM_LEDS];  //create an array 'CRGB' object to represent the LEDs
 
 //These lines define the SSID and password for the Wi-Fi network that the ESP32 will connect to.
-const char* ssid = "Dialog 4G 640";
-const char* password = "a59Bb9d1";
+const char* ssid = "HUAWEI nova 2i";
+const char* password = "12345678";
 
 WebServer server(80);  //This line creates a web server object that listens on port 80.
 
@@ -40,6 +43,17 @@ void setup() {
 //This line runs the main loop for the web server, which waits for incoming client requests and handles them.
 void loop() {
   server.handleClient();
+  // read the brightness value from a potentiometer connected to analog pin 0
+  brightness = map(analogRead(potentiometer), 0, 1023, 0, 255);
+  
+  // set the brightness of the LED panel
+  FastLED.setBrightness(brightness);
+  
+  // update the LEDs
+  FastLED.show();
+  
+  // add a small delay to prevent flickering
+  delay(10);
 }
 
 /*This is the function that handles incoming requests to the "/color-and-button" endpoint. 
@@ -72,3 +86,4 @@ void handleColorAndButton() {
 
   server.send(200, "text/plain", "OK");
 }
+
